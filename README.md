@@ -1,90 +1,89 @@
-# DSJ04 React Podcast App: Search, Sort, Filter, and Pagination
+# 📘 Project Brief: DSJ04 React Podcast Application
 
-## Project Overview
+Hello, and thank you for reviewing this brief. I am currently developing a React-based podcast browsing application designed to deliver a refined and responsive user experience. The application will enable users to search, sort, filter, and paginate through a curated list of podcast shows, with all interactions synchronized in real time.
 
-In this project, you will build an advanced podcast browsing experience that allows users to dynamically **search**, **sort**, **filter**, and **paginate** a list of podcast shows. The goal is to create an intuitive interface that responds to user input in real time and maintains a consistent, seamless experience throughout navigation.
+This project is intended to demonstrate proficiency in managing complex UI state, coordinating multiple user inputs, and maintaining a clean, scalable codebase. My objective is to build an intuitive interface that remains consistent across all navigation flows.
 
-This project will test your ability to manage complex UI state, synchronise multiple user interactions, and maintain clean, scalable code.
+---
 
-## Core Objectives
+## 🎯 Key Functional Requirements
 
-### Search Functionality
+### 1. Search Capability
 
-- Implement a flexible search that matches any part of the podcast title.
-- Results should update dynamically as the user types or upon submission.
-- Ensure that search results integrate with current filters, sorts, and pagination without resetting them.
+- Users will be able to search for podcasts by any portion of the title.
+- Search results will update dynamically as the user types or upon submission.
+- The search function will integrate seamlessly with active filters, sorting preferences, and pagination state.
 
-### Sorting Options
+### 2. Sorting Mechanism
 
-- Allow sorting podcasts by:
+- Sorting options will include:
   - Newest first (based on last updated date).
-  - Title A–Z and Z–A.
-- Sorting must work in tandem with any search or filter criteria.
+  - Alphabetical order (A–Z and Z–A).
+- Sorting will operate in conjunction with all other active controls.
 
-### Filtering
+### 3. Genre-Based Filtering
 
-- Enable genre-based filtering using a dropdown or multi-select input.
-- Ensure filters work alongside current search, sort, and pagination state.
-- Maintain selected filters when navigating between pages or updating the list.
+- A dropdown or multi-select input will allow users to filter podcasts by genre.
+- Filters will persist across page navigation and remain compatible with search and sort functions.
 
-### Pagination
+### 4. Pagination System
 
-- Display podcasts in manageable chunks using pagination, load-more, or infinite scroll.
-- Ensure that pagination respects the currently active search, filter, and sort state.
-- Keep all UI selections intact while navigating pages.
+- Podcasts will be displayed in manageable segments using pagination, load-more functionality, or infinite scroll.
+- Pagination will respect all active search, filter, and sort parameters.
+- UI selections will remain intact throughout navigation.
 
-### State Synchronisation
+### 5. State Synchronization
 
-- Maintain a centralised and cleanly organised state using React state, context, or a state management library.
-- Ensure that all controls (search, sort, filter, pagination) reflect changes immediately and stay in sync.
+- Application state will be centrally managed using React state, context, or a suitable state management library.
+- All controls will reflect changes immediately and remain synchronized.
 
-### Code Quality & Maintainability
+### 6. Code Quality and Documentation
 
-- Use JSDoc to document all major functions and modules.
-- Apply consistent formatting and naming conventions.
-- Keep logic modular and components reusable.
+- All major functions and modules will be documented using JSDoc.
+- Consistent formatting and naming conventions will be applied throughout.
+- Logic will be modular, and components will be reusable.
 
-### API Endpoints
+---
 
-Data can be called via a `fetch` request to the following endpoint.
+## 🌐 API Integration
 
-| URL                               |                             |
-| --------------------------------- | --------------------------- |
-| `https://podcast-api.netlify.app` | Returns an array of PREVIEW |
+Podcast data will be retrieved via the following endpoint:
 
-### Genre Titles
+[https://podcast-api.netlify.app](https://podcast-api.netlify.app) — this returns an array of podcast previews.
 
-Since the podcast preview information fetched from the API only exposes genres by their IDs, the actual genre details (such as titles) are not included in the API response. These details are instead provided in the data.js file found in this repository. Therefore, it is recommended that you include the mapping between genre ID values and their corresponding titles in your code using this file.
+**Note:** Genre information is provided only as IDs in the API response. Full genre titles will be mapped using the `data.js` file included in the repository.
 
-## Project Deliverables
+---
 
-- A fully functional React app that:
+## 📦 Project Deliverables
+
+- A fully functional React application that:
 
   - Fetches and displays podcast data.
-  - Allows live searching, sorting, filtering, and pagination.
-  - Maintains consistent state across all UI interactions.
+  - Supports live search, sorting, filtering, and pagination.
+  - Maintains consistent state across all user interactions.
 
-- **Clean Codebase** with:
+- A clean and maintainable codebase featuring:
 
-  - Reusable, modular components.
-  - Clear and consistent formatting across all files.
-  - JSDoc comments for functions/modules.
+  - Modular, reusable components.
+  - Consistent formatting and structure.
+  - JSDoc documentation.
 
-- **README.md** with:
+- A comprehensive `README.md` file containing:
 
   - Project overview and purpose.
   - Setup and usage instructions.
-  - Descriptions of key features (search, filter, sort, pagination).
+  - Descriptions of key features.
 
-- **Version Control (GitHub)**:
-  - Clear, meaningful commit messages.
+- Version control via GitHub with:
+  - Clear, descriptive commit messages.
   - Incremental commits reflecting development progress.
 
-## Success Criteria
-
-- No console errors or broken UI on load.
-- All features work correctly and together without losing state.
-- Clean, maintainable codebase with documentation.
-- A polished user experience with responsive layout and real-time updates.
-
 ---
+
+## ✅ Success Criteria
+
+- No console errors or broken UI elements on load.
+- All features function correctly and cohesively.
+- Codebase is clean, documented, and maintainable.
+- The user interface is polished, responsive, and intuitive.

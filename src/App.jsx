@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import PodcastTile from "./components/PodcastTile.jsx";
 import PodModal from "./components/PodModal.jsx";
 import SearchBar from "./components/SearchBar.jsx";
+import Filter from "./components/Filter.jsx";
+import SortBy from "./components/SortBy.jsx";
+import { genres } from "./data.js";
 
 function App() {
   const [podcasts, setPodcasts] = useState([]);
@@ -9,6 +12,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [sortBy, setSortBy] = useState("newest");
+  const [genreId, setGenreId] = useState("");
 
   useEffect(() => {
     async function fetchPreviews() {
@@ -41,6 +46,25 @@ function App() {
     setSelectedPodcast(null);
   };
 
+  const filteredPodcasts = podcasts
+    .filter((p) =>
+      genreId ? (p.genre_ids || []).includes(Number(genreId)) : true
+    )
+    .filter((p) => p.title.toLowerCase().includes(search.toLowerCase()));
+
+  const sortedPodcasts = filteredPodcasts.slice().sort((a, b) => {
+    if (sortBy === "newest") {
+      const dateA = new Date(a.updated_at || 0);
+      const dateB = new Date(b.updated_at || 0);
+      return dateB - dateA;
+    } else if (sortBy === "title-asc") {
+      return a.title.localeCompare(b.title);
+    } else if (sortBy === "title-desc") {
+      return b.title.localeCompare(a.title);
+    }
+    return 0;
+  });
+
   return (
     <div className="p-4">
       <header className="bg-white border-gray-400 shadow h-12 flex items-center pl-4">
@@ -58,9 +82,21 @@ function App() {
       </header>
 
       <main>
+        <div className="flex items-center mt-4 mb-4 space-x-4">
+          <Filter genres={genres} selected={genreId} onChange={setGenreId} />
+          <SortBy
+            value={sortBy}
+            onChange={setSortBy}
+            options={[
+              { label: "Newest First", value: "newest" },
+              { label: "Title A–Z", value: "title-asc" },
+              { label: "Title Z–A", value: "title-desc" },
+            ]}
+          />
+        </div>
         <section
           aria-label="Podcast Grid"
-          className="bg-grey-500 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="bg-grey-500 md:px-1 lg:px-2 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {loading ? (
             <div className="col-span-full flex justify-center items-center h-64">
@@ -70,19 +106,13 @@ function App() {
               </span>
             </div>
           ) : (
-            podcasts
-
-              .filter((podcast) =>
-                podcast.title.toLowerCase().includes(search.toLowerCase())
-              )
-
-              .map((podcast) => (
-                <PodcastTile
-                  key={podcast.id}
-                  podcast={podcast}
-                  onClick={openPodcast}
-                />
-              ))
+            sortedPodcasts.map((podcast) => (
+              <PodcastTile
+                key={podcast.id}
+                podcast={podcast}
+                onClick={openPodcast}
+              />
+            ))
           )}
         </section>
 
