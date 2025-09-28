@@ -70,18 +70,24 @@ function App() {
               </span>
             </div>
           ) : (
-            podcasts.map((podcast) => (
-              <PodcastTile
-                key={podcast.id}
-                podcast={podcast}
-                onClick={openPodcast}
-              />
-            ))
+            podcasts
+
+              .filter((podcast) =>
+                podcast.title.toLowerCase().includes(search.toLowerCase())
+              )
+
+              .map((podcast) => (
+                <PodcastTile
+                  key={podcast.id}
+                  podcast={podcast}
+                  onClick={openPodcast}
+                />
+              ))
           )}
         </section>
 
         <PodModal podcast={selectedPodcast} onClose={closePodcast} />
-        <SearchBar value={search} onChange={setSearch} visible={showSearch} />
+        <SearchBar onSearch={setSearch} visible={showSearch} />
       </main>
     </div>
   );

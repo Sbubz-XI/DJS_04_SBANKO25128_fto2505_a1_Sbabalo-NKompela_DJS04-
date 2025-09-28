@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function SearchBar({ value, onChange, visible }) {
+export default function SearchBar({ onSearch, visible }) {
+  const [input, setInput] = useState("");
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onSearch(input);
+    }
+  };
+
   return (
-    <div
-      className={`
-        fixed top-3 right-0 transition-transform duration-300 ease-in-out
-        ${visible ? "translate-x--10" : "translate-x-full"}
-      `}
-    >
-      <input
-        type="text"
-        placeholder="Search podcasts..."
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-64 px-3 py-2 border rounded shadow-md text-sm"
-      />
-    </div>
+    visible && (
+      <div className={"absolute top-5 right-20"}>
+        <input
+          type="text"
+          placeholder="Search podcasts..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          className="w-64 px-3 py-2 border rounded shadow-md text-sm text-gray-600"
+        />
+      </div>
+    )
   );
 }
